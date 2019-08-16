@@ -6,18 +6,26 @@ Created on Sat Aug  3 16:47:39 2019
 """
 import numpy as np
 import matplotlib.pyplot as plt
+import xlrd
 
 
 # stockfilter.py
 CONFIG_FNAME = 'config.txt'
 FACTOR_FNAME = 'factor.txt'
-STOCK_FNAME = 'stock.csv'
+STOCK_FNAME = 'stock.xlsx'
 
 # 生成斜率因子
 def createFactor( ls ):
-    
-    factorls = ls
-    
+    factorls = []
+    size = len(ls)
+    i = 0;
+    for item in ls:
+        if i == size-1:
+            break;
+        # ***
+        factor = (ls[i+1]-ls[i])
+        factorls.append( factor )
+        i = i+1
     return factorls
     
 
@@ -26,27 +34,61 @@ def parseConfig( fname ):
     ls = np.loadtxt( fname, dtype=np.float, delimiter=',' )
     # 生成曲线
     plt.plot( ls )
-    plt.savefig( 'test', dpi=600 )
+    plt.savefig( 'base', dpi=600 )
+    plt.close()
     # 创建斜率因子
     return createFactor( ls )
 
-# 读取待过滤的股票数据
-def parseStockData():
-    pass
+# 斜率因子比较
+def compareFactor( basefls, fls ):
+    if len(basefls) != len(fls):
+        return False
+    count = 0
+    for i in range(len(basefls)):
+        if abs(basefls[i]-fls[i]) < 2.1:
+            count = count + 1
+    if count == len(basefls):
+        return True
+    else:
+        return False
 
-# 过滤比较
-def stockFilter():
-    pass
+# 读取待过滤的股票数据 过滤比较
+def stockFilter( fname, factorls ):
+    
+    data = xlrd.open_workbook( fname )
+    # 目前只有一张表
+    table = data.sheet_by_index(0)
+    datels = table.col_values(0)
+    stockdatals = table.col_values(4)
+    # 0 为表头，删除
+    del datels[0]
+    del stockdatals[0]
+    #print( datels )
+    #print( stockdatals )
+    sdatels = []
+    for i in range(len(stockdatals)):
+        # 取10个值，计算斜率因子
+        if ( i+10 > len(stockdatals) ):
+            break
+        ls = stockdatals[i:i+10]
+        fls = createFactor( ls )
+        #print( fls )
+        # 与基准斜率因子比较
+        if compareFactor( factorls, fls ):
+            sdatels.append( datels[i] )
+            plt.plot( ls )
+            plt.savefig( datels[i], dpi=600 )
+            #plt.close()
 
+    return sdatels
 
 def main():
     factorls = []
     factorls = parseConfig( CONFIG_FNAME )
-    print( factorls[0] )
-    
-    parseStockData()
-    stockFilter()
-
+    np.savetxt( FACTOR_FNAME, factorls, fmt='%.6f' )
+    #print( factorls )
+    sls = stockFilter( STOCK_FNAME, factorls )
+    print( sls )
 
 main()
 
