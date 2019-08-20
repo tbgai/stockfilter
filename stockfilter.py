@@ -32,6 +32,7 @@ def createFactor( ls ):
 # 读取股票参数基准配置
 def parseConfig( fname ):
     ls = np.loadtxt( fname, dtype=np.float, delimiter=',' )
+    #print( ls )
     # 生成曲线
     plt.plot( ls )
     plt.savefig( 'base', dpi=600 )
@@ -45,7 +46,7 @@ def compareFactor( basefls, fls ):
         return False
     count = 0
     for i in range(len(basefls)):
-        if abs(basefls[i]-fls[i]) < 2.1:
+        if abs(basefls[i]-fls[i]) < 1.0:
             count = count + 1
     if count == len(basefls):
         return True
@@ -54,7 +55,7 @@ def compareFactor( basefls, fls ):
 
 # 读取待过滤的股票数据 过滤比较
 def stockFilter( fname, factorls ):
-    
+    ilen = len( factorls )
     data = xlrd.open_workbook( fname )
     # 目前只有一张表
     table = data.sheet_by_index(0)
@@ -68,9 +69,9 @@ def stockFilter( fname, factorls ):
     sdatels = []
     for i in range(len(stockdatals)):
         # 取10个值，计算斜率因子
-        if ( i+10 > len(stockdatals) ):
+        if ( i+ilen+1 > len(stockdatals) ):
             break
-        ls = stockdatals[i:i+10]
+        ls = stockdatals[i:i+ilen+1]
         fls = createFactor( ls )
         #print( fls )
         # 与基准斜率因子比较
