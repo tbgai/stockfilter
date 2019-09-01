@@ -7,6 +7,7 @@ Created on Sat Aug  3 16:47:39 2019
 import numpy as np
 import matplotlib.pyplot as plt
 import xlrd
+import tushare as ts
 
 
 # stockfilter.py
@@ -90,7 +91,26 @@ def stockFilter( fname, factorls ):
 
     return sdatels
 
+# 获取所有股票信息
+def getAllStockData():
+    pass
+
+# 对单个股票数据进行过滤
+def filterStock():
+    pass
+
+# 对所有股票进行过滤
+def filterAllStock():
+    pass
+
 def main():
+    # tushare的股票数据获取
+    print(ts.get_hist_data('600848',start='2019-08-29',end='2019-08-30'))
+    
+    getAllStockData()
+    filterAllStock()
+    
+    '''
     factorls = []
     factorls = parseConfig( CONFIG_FNAME )
     #print( factorls )
@@ -98,6 +118,7 @@ def main():
     #print( factorls )
     sls = stockFilter( STOCK_FNAME, factorls )
     print( sls )
+    '''
 
 main()
 
