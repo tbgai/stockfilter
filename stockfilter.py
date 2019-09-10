@@ -50,7 +50,7 @@ def compareFactor( basefls, fls ):
         return False
     count = 0
     for i in range(len(basefls)):
-        if abs(basefls[i]-fls[i]) < 1.5:
+        if abs(basefls[i]-fls[i]) < 1.2:
             count = count + 1
     if count == len(basefls):
         return True
@@ -73,7 +73,7 @@ def stockFilter( fname, factorls ):
     #print( stockdatals )
     sdatels = []
     for i in range(len(stockdatals)):
-        # 取10个值，计算斜率因子
+        # 取n个值，计算斜率因子
         if ( i+ilen+1 > len(stockdatals) ):
             break
         ls = stockdatals[i:i+ilen+2]
@@ -85,7 +85,8 @@ def stockFilter( fname, factorls ):
         # 与基准斜率因子比较
         if compareFactor( factorls, fls ):
             sdatels.append( datels[i] )
-            plt.plot( ls )
+            #plt.plot( ls )
+            plt.plot( fls )
             plt.savefig( datels[i], dpi=600 )
             #plt.close()
 
@@ -105,12 +106,12 @@ def filterAllStock():
 
 def main():
     # tushare的股票数据获取
-    print(ts.get_hist_data('600848',start='2019-08-29',end='2019-08-30'))
+    #print(ts.get_hist_data('600848',start='2019-08-29',end='2019-08-30'))
     
-    getAllStockData()
-    filterAllStock()
+    #getAllStockData()
+    #filterAllStock()a
     
-    '''
+    
     factorls = []
     factorls = parseConfig( CONFIG_FNAME )
     #print( factorls )
@@ -118,7 +119,7 @@ def main():
     #print( factorls )
     sls = stockFilter( STOCK_FNAME, factorls )
     print( sls )
-    '''
+    
 
 main()
 
