@@ -7,8 +7,8 @@ Created on Sat Aug  3 16:47:39 2019
 import numpy as np
 import matplotlib.pyplot as plt
 import xlrd
-import tushare as ts
-
+from stockfilter.parsestockdata import ParseStockData
+from stockfilter.filter import StockFilter
 
 # stockfilter.py
 CONFIG_FNAME = 'config.txt'
@@ -105,20 +105,20 @@ def filterAllStock():
     pass
 
 def main():
-    # tushare的股票数据获取
-    #print(ts.get_hist_data('600848',start='2019-08-29',end='2019-08-30'))
     
-    #getAllStockData()
-    #filterAllStock()a
+    parsedata = ParseStockData()
+    parsedata.getStockData()
     
+    sfilter = StockFilter()
+    sfilter.filter()
     
-    factorls = []
-    factorls = parseConfig( CONFIG_FNAME )
+    #factorls = []
+    #factorls = parseConfig( CONFIG_FNAME )
     #print( factorls )
-    np.savetxt( FACTOR_FNAME, factorls, fmt='%.6f' )
+    #np.savetxt( FACTOR_FNAME, factorls, fmt='%.6f' )
     #print( factorls )
-    sls = stockFilter( STOCK_FNAME, factorls )
-    print( sls )
+    #sls = stockFilter( STOCK_FNAME, factorls )
+    #print( sls )
     
 
 main()
