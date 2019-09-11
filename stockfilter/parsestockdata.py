@@ -20,5 +20,9 @@ class ParseStockData( object ):
 
 
 
+# 获取所有股票信息
+def getAllStockData():
+    pass
+
 
 
