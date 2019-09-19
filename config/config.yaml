@@ -1,0 +1,9 @@
+base:
+  base_stock: [20.28,20.31,21.27,21.89,21.53,22.65,22.98,23.23,22.7,22.34,21.76,22.09,21.6,21.9,21.88,23.1,22.99,22.54,22.63,22.52,22.99]
+
+algorithm:
+  second_derivative: true
+
+output:
+  picture: true
+  result_days: 100
