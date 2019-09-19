@@ -9,6 +9,7 @@ stock filter algorithm method
 import numpy as np
 import matplotlib.pyplot as plt
 import xlrd
+from stockfilter.parsestockdata import ParseStockData
 
 class StockFilter():
     
@@ -16,6 +17,17 @@ class StockFilter():
         pass
 
     def filter( self ):
+        
+        # 
+        
+        
+        
+        
+        
+        parsedata = ParseStockData()
+        parsedata.getStockBasicData()
+        
+        
         print("stock filter")
 
     # 生成斜率因子

@@ -5,16 +5,11 @@ Created on Sat Aug  3 16:47:39 2019
 @author: jingzl
 """
 # stockfilter.py
-from stockfilter.parsestockdata import ParseStockData
 from stockfilter.filter import StockFilter
 
 
-
 def main():
-    
-    parsedata = ParseStockData()
-    parsedata.getStockData()
-    
+
     sfilter = StockFilter()
     sfilter.filter()
     
@@ -25,7 +20,6 @@ def main():
     #print( factorls )
     #sls = stockFilter( STOCK_FNAME, factorls )
     #print( sls )
-    
 
 main()
 

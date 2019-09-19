@@ -15,7 +15,7 @@ class ParseStockData( object ):
     def __init__( self ):
         pass
     
-    def getStockData( self ):
+    def getStockBasicData( self ):
         
         # 获取所有的股票列表信息
         pro = ts.pro_api( token=TUSHARE_TOKEN )
@@ -39,11 +39,6 @@ class ParseStockData( object ):
         print( dl2[2] )
         
 
-
-
-# 获取所有股票信息
-def getAllStockData():
-    pass
-
-
-
+    def getSingleStockData( self, ts_code, days ):
+        
+        return dl
