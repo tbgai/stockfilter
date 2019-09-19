@@ -6,29 +6,67 @@ Created on Tue Sep 10 21:32:58 2019
 
 stock filter algorithm method
 """
+import time
 import numpy as np
 import matplotlib.pyplot as plt
 import xlrd
-from stockfilter.parsestockdata import ParseStockData
+from stockfilter.stockquery import StockQuery
 
-class StockFilter():
+class StockFilter( object ):
     
-    def __init__( self ):
-        pass
+    basestock = []
+    second_derivative = False
+    output_pic = False
+    result_days = 100
+    
+    def __init__( self, basestock, second_derivative, output_pic, result_days ):
+        self.basestock = basestock
+        self.second_derivative = second_derivative
+        self.output_pic = output_pic
+        self.result_days = result_days
 
-    def filter( self ):
+    def filter( self  ):
         
-        # 
+        #print( self.basestock )
         
-        
-        
-        
-        
-        parsedata = ParseStockData()
-        parsedata.getStockBasicData()
+        print( "开始处理".center( 50, '-' ) ) 
         
         
-        print("stock filter")
+        
+        '''
+        提前计算出基础数据的一阶导，二阶导数据
+        
+        1. 获取股票列表数据，进行循环
+        2. 通过股票代码，获取单个股票的最近30天数据
+        3. 对股票进行一阶导、二阶导计算
+        4. 进行相关性分析比较
+        5. 将过滤出来的股票数据的一阶导和二阶导数据绘制输出，同时绘制基础数据的一阶导/二阶导
+        6. 再次获取过滤出来的股票最近100天的数据，绘制曲线输出
+        7. 处理下一个股票
+        '''
+        
+        start = time.perf_counter()
+        
+        # 股票处理循环
+        for i in range(3000):
+            a = '■' * (int)(i/3000 * 100)
+            b = '□' * (int)(100-(i/3000.0 * 100))
+            c = (i / 3000) * 100
+            dur = time.perf_counter() - start
+            print( "\r{:^3.0f}%[{}{}]{:.2f}s".format(c,a,b,dur), end='' )
+            time.sleep(0.01)
+        
+        
+        
+        
+        
+        print( "\n"+"处理结束".center( 50, '-' ) )
+        
+        #stockquery = StockQuery()
+        #stockquery.getStockBasicData()
+        
+        
+        #print("stock filter")
 
     # 生成斜率因子
     def createFactor( ls ):
