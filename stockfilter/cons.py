@@ -7,7 +7,5 @@ Created on 2019/09/10
 
 VERSION = '0.1.0'
 
-CONFIG_FNAME = 'config.txt'
-FACTOR_FNAME = 'factor.txt'
-STOCK_FNAME = 'stock.xlsx'
+BASESTOCK_FNAME = '/config/config.yaml'
 
