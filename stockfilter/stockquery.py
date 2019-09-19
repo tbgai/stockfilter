@@ -10,7 +10,7 @@ import tushare as ts
 
 TUSHARE_TOKEN = '8af63d3d7f7ec3bc0e511a85b13d0cf01c57dd310bc1f8ed4b902ad3'
 
-class ParseStockData( object ):
+class StockQuery( object ):
     
     def __init__( self ):
         pass
