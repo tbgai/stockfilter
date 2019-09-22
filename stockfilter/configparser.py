@@ -13,6 +13,8 @@ class ConfigParser( object ):
     
     base_stock = []
     second_derivative = False
+    delta_one = 1.0
+    delta_two = 1.0
     output_pic = False
     result_days = 100
 
@@ -29,6 +31,8 @@ class ConfigParser( object ):
             
             self.base_stock = configs['base']['base_stock']
             self.second_derivative = configs['algorithm']['second_derivative']
+            self.delta_one = configs['algorithm']['delta_one']
+            self.delta_two = configs['algorithm']['delta_two']
             self.output_pic = configs['output']['picture']
             self.result_days = configs['output']['result_days']
             
@@ -41,6 +45,12 @@ class ConfigParser( object ):
     
     def getSecondDerivative( self ):
         return self.second_derivative
+
+    def getDeltaOne( self ):
+        return self.delta_one
+    
+    def getDeltaTwo( self ):
+        return self.delta_two
     
     def getOutputPic( self ):
         return self.output_pic
