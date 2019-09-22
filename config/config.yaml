@@ -3,6 +3,8 @@ base:
 
 algorithm:
   second_derivative: true
+  delta_one: 1.0
+  delta_two: 1.0
 
 output:
   picture: true
